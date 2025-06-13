@@ -1,0 +1,441 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 70px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #f5f5f5;
+    background-color: #1a1a1a;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.main-header {
+    background-color: rgba(26, 26, 26, 0.9);
+    padding: 12px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.main-nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.site-logo {
+    color: #e50914;
+    font-size: 1.8rem;
+    font-weight: 900;
+    text-decoration: none;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.main-nav ul li a {
+    color: #f5f5f5;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 5px 0;
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+.main-nav ul li a:hover,
+.main-nav ul li a.active {
+    color: #fdd835;
+    border-bottom: 2px solid #fdd835;
+}
+
+/* Movie Detail Page */
+main.movie-detail-page {
+    padding-top: 70px;
+}
+
+.detail-hero {
+    background: url("assets/bg1.webp") center/cover fixed;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 70px);
+    padding: 40px 0;
+}
+.detail-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+}
+
+.detail-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+    padding: 24px;
+    width: 100%;
+}
+
+.poster-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.poster {
+    width: 300px;
+    height: 450px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.poster:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+}
+.poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+}
+
+.info-section {
+    flex-grow: 1;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 280px;
+}
+
+.movie-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: #f5f5f5;
+    text-align: left;
+    width: 100%;
+    word-wrap: break-word;
+}
+.movie-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+    color: #ccc;
+    font-size: 0.9em;
+    width: 100%;
+}
+.movie-meta .value,
+.card-rating i,
+.review-rating i {
+    color: #fdd835;
+    font-weight: bold;
+}
+.movie-description {
+    color: #ccc;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.watch-now-button {
+    background-color: #e50914;
+    color: #f5f5f5;
+    padding: 12px 24px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    border-radius: 4px;
+    margin-top: 24px;
+    transition: background-color 0.3s;
+}
+.watch-now-button:hover {
+    background-color: #830000;
+}
+
+.cast-header {
+    font-size: 1.5rem;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    color: #f5f5f5;
+}
+
+.movie-cast {
+    width: 100%;
+}
+
+.cast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 8px;
+    margin-top: 16px;
+}
+.cast-member {
+    text-align: center;
+    background-color: #2c2c2c;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.cast-member:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+.cast-member img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 8px;
+    border: 2px solid #e50914;
+    transition: border-color 0.3s;
+}
+.cast-member:hover img {
+    border-color: #fdd835;
+}
+.cast-name {
+    color: #f5f5f5;
+    font-size: 0.8em;
+}
+
+/* Recommendations Section */
+.movie-recommendations, .user-reviews {
+    padding: 40px 0;
+    text-align: center;
+}
+.section-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 24px;
+    color: #f5f5f5;
+}
+
+.recommendation-grid, .reviews-grid {
+    display: grid;
+    gap: 24px;
+    margin-bottom: 24px;
+    justify-content: center;
+}
+.recommendation-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    overflow-x: auto;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+}
+.reviews-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.movie-card {
+    text-decoration: none;
+    color: #f5f5f5;
+    background-color: #2c2c2c;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.movie-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+}
+.movie-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.card-title {
+    padding: 8px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card-details {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 8px 8px;
+    font-size: 0.85em;
+    color: #ccc;
+}
+.card-year {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    padding: 2px 6px;
+}
+
+.review-card {
+    background-color: #2c2c2c;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+.review-text {
+    font-style: italic;
+    margin-bottom: 12px;
+    color: #e0e0e0;
+}
+.reviewer-name {
+    font-weight: bold;
+    color: #f5f5f5;
+    margin-bottom: 8px;
+    display: block;
+}
+.review-rating i {
+    font-size: 1.1em;
+    color: #fdd835;
+}
+
+.view-all-reviews-button {
+    background-color: #e50914;
+    color: #f5f5f5;
+    padding: 12px 24px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.view-all-reviews-button:hover {
+    background-color: #830000;
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        height: auto;
+        padding-bottom: 20px;
+    }
+    .main-nav-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .site-logo {
+        margin-top: 10px;
+    }
+    .main-nav ul {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        align-items: center;
+        padding: 0;
+    }
+    .main-nav ul li a {
+        padding: 10px 15px;
+        display: block;
+    }
+
+    html {
+        scroll-padding-top: 140px;
+    }
+    main.movie-detail-page {
+        padding-top: 140px;
+    }
+    .detail-hero {
+        min-height: calc(100vh - 140px);
+    }
+
+    .detail-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .poster {
+        width: 250px;
+        height: 375px;
+    }
+    .info-section {
+        max-width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+    .movie-title, .movie-description, .cast-header {
+        text-align: center;
+    }
+    .movie-meta, .cast-grid, .recommendation-grid, .reviews-grid {
+        justify-content: center;
+    }
+    .recommendation-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        overflow-x: scroll;
+    }
+    .movie-card img {
+        height: 180px;
+    }
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .movie-title {
+        font-size: 2rem;
+    }
+    .poster {
+        width: 200px;
+        height: 300px;
+    }
+    .recommendation-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 15px;
+    }
+    .movie-card img {
+        height: 150px;
+    }
+    .cast-grid {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    }
+    .cast-member img {
+        width: 50px;
+        height: 50px;
+    }
+    .cast-name {
+        font-size: 0.7em;
+    }
+}
