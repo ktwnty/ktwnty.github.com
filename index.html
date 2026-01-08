@@ -1,0 +1,2931 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jawa Barat - Tanah Parahyangan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a4d2e;
+            --secondary: #d4af37;
+            --accent: #8b4513;
+            --dark: #0a0a0a;
+            --light: #faf8f3;
+            --gold: #c9a961;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--dark);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 10, 10, 0.85);
+            z-index: -1;
+        }
+
+        /* SMOOTH ANIMATIONS */
+        * {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links li {
+            animation: fadeIn 0.6s ease-out both;
+        }
+
+        .nav-links li:nth-child(1) { animation-delay: 0.1s; }
+        .nav-links li:nth-child(2) { animation-delay: 0.2s; }
+        .nav-links li:nth-child(3) { animation-delay: 0.3s; }
+        .nav-links li:nth-child(4) { animation-delay: 0.4s; }
+        .nav-links li:nth-child(5) { animation-delay: 0.5s; }
+        .nav-links li:nth-child(6) { animation-delay: 0.6s; }
+        .nav-links li:nth-child(7) { animation-delay: 0.7s; }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            position: relative;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: white;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Burger button (default: hidden di desktop) */
+        .burger{
+        display:none;
+        width:44px;
+        height:44px;
+        background: transparent;
+        border: 1px solid rgba(212, 175, 55, 0.35);
+        border-radius: 12px;
+        cursor: pointer;
+        align-items:center;
+        justify-content:center;
+        gap:6px;
+        flex-direction: column;
+        }
+
+        .burger span{
+        display:block;
+        width:22px;
+        height:2px;
+        background: rgba(255,255,255,0.85);
+        border-radius: 2px;
+        }
+
+        /* Mobile behavior */
+        @media (max-width: 768px){
+        .burger{ display:flex; }
+
+        /* sembunyikan menu default */
+        .nav-links{
+            position: absolute;
+            left: 3%;
+            right: 3%;
+            top: calc(100% + 12px);
+            display: none;              /* penting: hidden dulu */
+            flex-direction: column;
+            gap: 0;
+            padding: 12px;
+            background: rgba(10, 10, 10, 0.97);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 16px;
+            backdrop-filter: blur(16px);
+        }
+
+        .nav-links li{ padding: 10px 8px; }
+        .nav-links a{ display:block; width:100%; }
+
+        /* kalau navbar kebuka */
+        nav.nav-open .nav-links{
+            display: flex;
+        }
+
+        /* optional: animasi burger jadi X */
+        nav.nav-open .burger span:nth-child(1){ transform: translateY(8px) rotate(45deg); }
+        nav.nav-open .burger span:nth-child(2){ opacity: 0; }
+        nav.nav-open .burger span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
+        }
+
+
+        /* HERO */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), 
+                        url('hero.webp') center/cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: 5px;
+            text-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+        }
+
+        .hero h1 span {
+            display: block;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            background: linear-gradient(135deg, var(--secondary), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: 1rem;
+            letter-spacing: 8px;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            letter-spacing: 2px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 1.2rem 4rem;
+            background: linear-gradient(135deg, var(--secondary), var(--gold));
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        }
+
+        /* PAGE SECTIONS - dengan background foto */
+        .page-section {
+            display: none;
+            min-height: 100vh;
+            padding: 120px 5% 80px;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .page-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 0;
+        }
+
+        .page-section > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-section.active {
+            display: block;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Background untuk setiap page */
+        #beranda {
+            background-image: url('masyarakat.jpg');
+        }
+
+        #destinasi {
+            background-image: url('destinasi.jpg');
+        }
+
+        #kuliner {
+            background-image: url('kuliner.jpg');
+        }
+
+        #budaya {
+            background-image: url('budaya.jpg');
+        }
+
+        #galeri {
+            background-image: url('galeri.jpg');
+        }
+
+        #peta {
+            background-image: url('peta.jpg');
+        }
+
+        #pemerintahan {
+            background-image: url('berandahero1.jpeg');
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--secondary), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            opacity: 0.8;
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        /* ==================== BERANDA ==================== */
+        .culture-hero {
+            max-width: 1400px;
+            margin: 0 auto 6rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .culture-hero-text h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .culture-hero-text p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .culture-hero-image {
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .culture-hero-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.3), transparent);
+            opacity: 0;
+        }
+
+        .culture-hero-image:hover::before {
+            opacity: 1;
+        }
+
+        .culture-hero-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 80px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Sejarah dengan background card */
+        .history-section {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 4rem;
+            background: linear-gradient(135deg, rgba(26, 77, 46, 0.4), rgba(139, 69, 19, 0.4));
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .history-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            color: var(--secondary);
+            margin-bottom: 3rem;
+        }
+
+        .history-timeline {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .history-item {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 2rem;
+            padding: 2rem;
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .history-item:hover {
+            transform: translateX(10px);
+            background: rgba(26, 77, 46, 0.3);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .history-year {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gold);
+            text-align: center;
+        }
+
+        .history-content h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .history-content p {
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        /* Keunikan dengan background foto berbeda */
+        .uniqueness-grid {
+            max-width: 1400px;
+            margin: 6rem auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .unique-box {
+            padding: 3rem;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .unique-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(26, 77, 46, 0.8));
+            z-index: 1;
+        }
+
+        .unique-box > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .unique-box:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .unique-box:hover::before {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.85), rgba(26, 77, 46, 0.75));
+        }
+
+        .unique-icon {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .unique-box h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .unique-box p {
+            text-align: center;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        /* ==================== BERANDA EXTENDED ==================== */
+        /* Stats Section */
+        .stats-section {
+            max-width: 1400px;
+            margin: 6rem auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-card {
+            padding: 2.5rem 2rem;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(26, 77, 46, 0.2));
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            text-align: center;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Masyarakat Section */
+        .masyarakat-section {
+            max-width: 1400px;
+            margin: 6rem auto;
+        }
+
+        .masyarakat-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .masyarakat-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+        }
+
+        .masyarakat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .masyarakat-card {
+            display: flex;
+            gap: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.7), rgba(26, 77, 46, 0.3));
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .masyarakat-card:nth-child(1) { animation-delay: 0.1s; }
+        .masyarakat-card:nth-child(2) { animation-delay: 0.2s; }
+        .masyarakat-card:nth-child(3) { animation-delay: 0.3s; }
+        .masyarakat-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .masyarakat-card:hover {
+            transform: translateX(10px);
+            border-color: var(--secondary);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .masyarakat-icon {
+            font-size: 4rem;
+            flex-shrink: 0;
+        }
+
+        .masyarakat-content h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 0.8rem;
+        }
+
+        .masyarakat-content p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        /* Budaya Preview Section */
+        .budaya-preview {
+            max-width: 1400px;
+            margin: 6rem auto;
+        }
+
+        .budaya-preview h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .budaya-preview-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+        }
+
+        .budaya-carousel {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .budaya-card {
+            background: linear-gradient(135deg, rgba(26, 77, 46, 0.3), rgba(139, 69, 19, 0.2));
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .budaya-card:nth-child(1) { animation-delay: 0.1s; }
+        .budaya-card:nth-child(2) { animation-delay: 0.15s; }
+        .budaya-card:nth-child(3) { animation-delay: 0.2s; }
+        .budaya-card:nth-child(4) { animation-delay: 0.25s; }
+
+        .budaya-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .budaya-card-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .budaya-card-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        }
+
+        .budaya-card-content {
+            padding: 1.5rem;
+        }
+
+        .budaya-card-content h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .budaya-card-content p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+
+        /* Filosofi Section */
+        .filosofi-section {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 4rem;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(26, 77, 46, 0.2));
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            text-align: center;
+        }
+
+        .filosofi-section:hover {
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
+        }
+
+        .filosofi-quote {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .filosofi-meaning {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .filosofi-values {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .filosofi-value {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            background: rgba(212, 175, 55, 0.15);
+            border-radius: 30px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .filosofi-value:hover {
+            background: rgba(212, 175, 55, 0.25);
+            transform: scale(1.05);
+        }
+
+        .filosofi-value span:first-child {
+            font-size: 1.5rem;
+        }
+
+        /* Bahasa Section */
+        .bahasa-section {
+            max-width: 1400px;
+            margin: 6rem auto;
+        }
+
+        .bahasa-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .bahasa-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+        }
+
+        .bahasa-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .bahasa-card {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.6), rgba(26, 77, 46, 0.3));
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            border-left: 4px solid var(--secondary);
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .bahasa-card:nth-child(1) { animation-delay: 0.1s; }
+        .bahasa-card:nth-child(2) { animation-delay: 0.15s; }
+        .bahasa-card:nth-child(3) { animation-delay: 0.2s; }
+        .bahasa-card:nth-child(4) { animation-delay: 0.25s; }
+        .bahasa-card:nth-child(5) { animation-delay: 0.3s; }
+        .bahasa-card:nth-child(6) { animation-delay: 0.35s; }
+
+        .bahasa-card:hover {
+            transform: translateX(10px);
+            background: rgba(26, 77, 46, 0.4);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .bahasa-sunda {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .bahasa-indonesia {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .bahasa-usage {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        /* Kesenian Grid */
+        .kesenian-section {
+            max-width: 1400px;
+            margin: 6rem auto;
+        }
+
+        .kesenian-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .kesenian-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+        }
+
+        .kesenian-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .kesenian-card {
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(26, 77, 46, 0.3), rgba(139, 69, 19, 0.2));
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            text-align: center;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .kesenian-card:nth-child(1) { animation-delay: 0.1s; }
+        .kesenian-card:nth-child(2) { animation-delay: 0.15s; }
+        .kesenian-card:nth-child(3) { animation-delay: 0.2s; }
+        .kesenian-card:nth-child(4) { animation-delay: 0.25s; }
+        .kesenian-card:nth-child(5) { animation-delay: 0.3s; }
+        .kesenian-card:nth-child(6) { animation-delay: 0.35s; }
+
+        .kesenian-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .kesenian-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .kesenian-card h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .kesenian-card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        /* ==================== DESTINASI ==================== */
+        .destination-banner {
+            max-width: 1600px;
+            margin: 0 auto 4rem;
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .destination-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.85), transparent);
+        }
+
+        .destination-banner:hover {
+            transform: scale(1.01);
+            box-shadow: 0 30px 80px rgba(212, 175, 55, 0.3);
+        }
+
+        .banner-content {
+            position: absolute;
+            left: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .banner-content h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .banner-content p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .destination-list {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            gap: 4rem;
+        }
+
+        .dest-row {
+            display: grid;
+            grid-template-columns: 500px 1fr;
+            gap: 3rem;
+            align-items: center;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .dest-row:nth-child(1) { animation-delay: 0.4s; }
+        .dest-row:nth-child(2) { animation-delay: 0.5s; }
+        .dest-row:nth-child(3) { animation-delay: 0.6s; }
+        .dest-row:nth-child(4) { animation-delay: 0.7s; }
+
+        .dest-row:nth-child(even) {
+            grid-template-columns: 1fr 500px;
+        }
+
+        .dest-row:nth-child(even) .dest-image {
+            order: 2;
+        }
+
+        .dest-image {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .dest-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.3), transparent);
+            opacity: 0;
+        }
+
+        .dest-row:hover .dest-image {
+            transform: scale(1.03) rotate(1deg);
+            box-shadow: 0 30px 80px rgba(212, 175, 55, 0.4);
+        }
+
+        .dest-row:hover .dest-image::after {
+            opacity: 1;
+        }
+
+        .dest-info h3 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .dest-info p {
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .dest-details {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(5px);
+            border-radius: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .detail-item:hover {
+            background: rgba(212, 175, 55, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .detail-icon {
+            font-size: 1.5rem;
+        }
+
+        .detail-text {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        /* ==================== KULINER ==================== */
+        .culinary-showcase {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            gap: 5rem;
+        }
+
+        .culinary-feature {
+            display: grid;
+            grid-template-columns: 550px 1fr;
+            gap: 4rem;
+            align-items: center;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .culinary-feature:nth-child(1) { animation-delay: 0.3s; }
+        .culinary-feature:nth-child(2) { animation-delay: 0.4s; }
+        .culinary-feature:nth-child(3) { animation-delay: 0.5s; }
+        .culinary-feature:nth-child(4) { animation-delay: 0.6s; }
+
+        .culinary-feature:nth-child(even) {
+            grid-template-columns: 1fr 550px;
+        }
+
+        .culinary-feature:nth-child(even) .culinary-image {
+            order: 2;
+        }
+
+        .culinary-image {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .culinary-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 4px solid var(--secondary);
+            border-radius: 20px;
+            opacity: 0;
+        }
+
+        .culinary-feature:hover .culinary-image {
+            transform: scale(1.05) rotate(-1deg);
+            box-shadow: 0 30px 80px rgba(212, 175, 55, 0.4);
+        }
+
+        .culinary-feature:hover .culinary-image::after {
+            opacity: 1;
+        }
+
+        .culinary-text h3 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .culinary-text p {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .culinary-badge {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background: rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(5px);
+            border: 2px solid var(--secondary);
+            border-radius: 25px;
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 0.95rem;
+        }
+
+        .culinary-badge:hover {
+            background: rgba(212, 175, 55, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* ==================== BUDAYA ==================== */
+        .budaya-hero {
+            max-width: 1600px;
+            margin: 0 auto 6rem;
+            height: 600px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .budaya-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent 60%);
+        }
+
+        .budaya-hero:hover {
+            transform: scale(1.01);
+            box-shadow: 0 30px 80px rgba(212, 175, 55, 0.3);
+        }
+
+        .budaya-hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 4rem;
+            max-width: 800px;
+        }
+
+        .budaya-hero-content h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .budaya-hero-content p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .budaya-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+        }
+
+        .budaya-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .budaya-item:nth-child(1) { animation-delay: 0.4s; }
+        .budaya-item:nth-child(2) { animation-delay: 0.5s; }
+        .budaya-item:nth-child(3) { animation-delay: 0.6s; }
+        .budaya-item:nth-child(4) { animation-delay: 0.7s; }
+
+        .budaya-image {
+            height: 350px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .budaya-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 50%);
+        }
+
+        .budaya-item:hover .budaya-image {
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.4);
+        }
+
+        .budaya-text h3 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .budaya-text p {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* ==================== GALERI - BENTO GRID ==================== */
+        .bento-grid {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 250px;
+            gap: 2rem;
+        }
+
+        .bento-item {
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .bento-item:nth-child(1) { animation-delay: 0.1s; }
+        .bento-item:nth-child(2) { animation-delay: 0.15s; }
+        .bento-item:nth-child(3) { animation-delay: 0.2s; }
+        .bento-item:nth-child(4) { animation-delay: 0.25s; }
+        .bento-item:nth-child(5) { animation-delay: 0.3s; }
+        .bento-item:nth-child(6) { animation-delay: 0.35s; }
+        .bento-item:nth-child(7) { animation-delay: 0.4s; }
+        .bento-item:nth-child(8) { animation-delay: 0.45s; }
+        .bento-item:nth-child(9) { animation-delay: 0.5s; }
+
+        .bento-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            opacity: 0.7;
+        }
+
+        .bento-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(212, 175, 55, 0.4);
+        }
+
+        .bento-item:hover::before {
+            opacity: 1;
+        }
+
+        /* Berbagai ukuran untuk variasi */
+        .bento-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .bento-item:nth-child(4) {
+            grid-column: span 2;
+        }
+
+        .bento-item:nth-child(7) {
+            grid-row: span 2;
+        }
+
+        .bento-item:nth-child(9) {
+            grid-column: span 2;
+        }
+
+        .bento-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            z-index: 2;
+        }
+
+        .bento-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .bento-content p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            opacity: 0.9;
+            margin-bottom: 0.8rem;
+        }
+
+        .price-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: var(--secondary);
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 0.85rem;
+            border-radius: 20px;
+        }
+
+        .price-badge:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* ==================== PETA ==================== */
+        .map-header {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(26, 77, 46, 0.4), rgba(139, 69, 19, 0.4));
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .map-header:hover {
+            transform: scale(1.01);
+            background: linear-gradient(135deg, rgba(26, 77, 46, 0.5), rgba(139, 69, 19, 0.5));
+        }
+
+        .map-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            background: linear-gradient(135deg, var(--secondary), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        /* Map Image Section */
+        .map-image-container {
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .map-image {
+            width: 100%;
+            height: 500px;
+            background: url('map.jpg') center/contain no-repeat;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 3px solid rgba(212, 175, 55, 0.5);
+            border-radius: 20px;
+        }
+
+        .map-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 80px rgba(212, 175, 55, 0.3);
+        }
+
+        .map-caption {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .regions-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .region-card {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(26, 77, 46, 0.3), rgba(139, 69, 19, 0.3));
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .region-card:nth-child(1) { animation-delay: 0.1s; }
+        .region-card:nth-child(2) { animation-delay: 0.15s; }
+        .region-card:nth-child(3) { animation-delay: 0.2s; }
+        .region-card:nth-child(4) { animation-delay: 0.25s; }
+        .region-card:nth-child(5) { animation-delay: 0.3s; }
+        .region-card:nth-child(6) { animation-delay: 0.35s; }
+        .region-card:nth-child(7) { animation-delay: 0.4s; }
+        .region-card:nth-child(8) { animation-delay: 0.45s; }
+        .region-card:nth-child(9) { animation-delay: 0.5s; }
+        .region-card:nth-child(10) { animation-delay: 0.55s; }
+        .region-card:nth-child(11) { animation-delay: 0.6s; }
+        .region-card:nth-child(12) { animation-delay: 0.65s; }
+
+        .region-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--secondary);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+            background: linear-gradient(135deg, rgba(26, 77, 46, 0.4), rgba(139, 69, 19, 0.4));
+        }
+
+        .region-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .region-card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        /* ==================== PEMERINTAHAN ==================== */
+        .gov-intro {
+            max-width: 1200px;
+            margin: 0 auto 5rem;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .gov-intro p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.9;
+            opacity: 0.9;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Struktur Pemerintahan */
+        .gov-structure {
+            max-width: 1400px;
+            margin: 0 auto 6rem;
+        }
+
+        .gov-structure h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            color: var(--secondary);
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .structure-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .gov-leader {
+            padding: 3rem 5rem;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(201, 169, 97, 0.2));
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 3px solid var(--secondary);
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .gov-leader:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(212, 175, 55, 0.4);
+        }
+
+        .gov-leader .position {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .gov-leader .name {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .gov-leader .period {
+            font-size: 0.95rem;
+            opacity: 0.7;
+        }
+
+        .connector-line {
+            width: 4px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--secondary), var(--gold));
+            border-radius: 2px;
+        }
+
+        .gov-deputy {
+            padding: 2rem 4rem;
+            background: linear-gradient(135deg, rgba(26, 77, 46, 0.4), rgba(139, 69, 19, 0.3));
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .gov-deputy:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .gov-deputy .position {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .gov-deputy .name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        /* Organizational Grid */
+        .org-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .org-card {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.7), rgba(26, 77, 46, 0.3));
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            text-align: center;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .org-card:nth-child(1) { animation-delay: 0.7s; }
+        .org-card:nth-child(2) { animation-delay: 0.75s; }
+        .org-card:nth-child(3) { animation-delay: 0.8s; }
+        .org-card:nth-child(4) { animation-delay: 0.85s; }
+
+        .org-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--secondary);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .org-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .org-card h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 0.8rem;
+        }
+
+        .org-card p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Layanan Pemerintahan */
+        .gov-services {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gov-services h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .gov-services .section-subtitle {
+            margin-bottom: 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(26, 77, 46, 0.3), rgba(139, 69, 19, 0.2));
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--gold));
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0.1s; }
+        .service-card:nth-child(2) { animation-delay: 0.15s; }
+        .service-card:nth-child(3) { animation-delay: 0.2s; }
+        .service-card:nth-child(4) { animation-delay: 0.25s; }
+        .service-card:nth-child(5) { animation-delay: 0.3s; }
+        .service-card:nth-child(6) { animation-delay: 0.35s; }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--secondary);
+            border-radius: 25px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .service-link:hover {
+            background: var(--secondary);
+            color: var(--dark);
+            transform: translateX(5px);
+        }
+
+        /* Contact Section */
+        .gov-contact {
+            max-width: 1200px;
+            margin: 5rem auto 0;
+            padding: 4rem;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(26, 77, 46, 0.3));
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+
+        .gov-contact h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-item .icon {
+            font-size: 2rem;
+        }
+
+        .contact-item .text {
+            text-align: left;
+        }
+
+        .contact-item .label {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-item .value {
+            font-size: 1.1rem;
+            color: var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            margin-top: 4rem;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1200px) {
+            .culture-hero,
+            .dest-row,
+            .dest-row:nth-child(even),
+            .budaya-grid,
+            .culinary-feature,
+            .culinary-feature:nth-child(even) {
+                grid-template-columns: 1fr;
+            }
+
+            .dest-row:nth-child(even) .dest-image,
+            .culinary-feature:nth-child(even) .culinary-image {
+                order: 1;
+            }
+
+            .uniqueness-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .org-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .masyarakat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .budaya-carousel {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bahasa-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .kesenian-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 3%;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.75rem;
+            }
+
+            .uniqueness-grid,
+            .budaya-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .history-item {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .banner-content {
+                left: 5%;
+                right: 5%;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bento-item:nth-child(1),
+            .bento-item:nth-child(4),
+            .bento-item:nth-child(7),
+            .bento-item:nth-child(9) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .org-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gov-leader {
+                padding: 2rem 3rem;
+            }
+
+            .gov-leader .name {
+                font-size: 1.5rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .map-image {
+                height: 300px;
+            }
+
+            .stats-section {
+                grid-template-columns: 1fr;
+            }
+
+            .masyarakat-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .budaya-carousel,
+            .bahasa-grid,
+            .kesenian-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filosofi-values {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                gap: 0.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">JAWA BARAT</div>
+            <button class="burger" aria-label="Buka menu" aria-expanded="false" aria-controls="primary-nav">
+            <span></span>
+            <span></span>
+            <span></span>
+            </button>
+
+            <ul class="nav-links" id="primary-nav">
+                <li><a href="#" data-page="beranda">Beranda</a></li>
+                <li><a href="#" data-page="destinasi">Destinasi</a></li>
+                <li><a href="#" data-page="kuliner">Kuliner</a></li>
+                <li><a href="#" data-page="budaya">Budaya</a></li>
+                <li><a href="#" data-page="galeri">Galeri</a></li>
+                <li><a href="#" data-page="peta">Peta</a></li>
+                <li><a href="#" data-page="pemerintahan">Pemerintahan</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero" id="hero">
+        <div class="hero-content">
+            <h1>JAWA BARAT
+                <span>Sariak Layung di Tanah Parahyangan</span>
+            </h1>
+            <p>Cahaya lembayung di tanah Parahyangan</p>
+            <a href="#" class="hero-btn">Jelajahi Sekarang</a>
+        </div>
+    </div>
+
+    <!-- BERANDA -->
+    <section class="page-section" id="beranda">
+        <h1 class="section-title">Selamat Datang di Jawa Barat</h1>
+        <p class="section-subtitle">Provinsi dengan Sejuta Pesona</p>
+
+        <div class="culture-hero">
+            <div class="culture-hero-text">
+                <h2>Tanah Parahyangan yang Mempesona</h2>
+                <p>Jawa Barat, dikenal sebagai Tanah Parahyangan atau "Tempat Para Dewa", adalah provinsi yang kaya akan keindahan alam, warisan budaya, dan kelezatan kuliner yang mendunia.</p>
+                <p>Dengan luas 35.377,76 km² dan populasi lebih dari 48 juta jiwa, Jawa Barat merupakan provinsi terpadat di Indonesia dengan keberagaman yang luar biasa. Provinsi ini berbatasan dengan DKI Jakarta dan Banten di utara, Jawa Tengah di timur, serta Samudera Hindia di selatan.</p>
+            </div>
+            <div class="culture-hero-image" style="background-image: url('beranda.jpg')"></div>
+        </div>
+
+        <!-- Statistik -->
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-number">48+ Juta</div>
+                <div class="stat-label">Penduduk</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🗺️</div>
+                <div class="stat-number">35.377</div>
+                <div class="stat-label">km² Luas Wilayah</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🏛️</div>
+                <div class="stat-number">27</div>
+                <div class="stat-label">Kabupaten/Kota</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🏔️</div>
+                <div class="stat-number">3.078 m</div>
+                <div class="stat-label">Gunung Ciremai (Tertinggi)</div>
+            </div>
+        </div>
+
+        <!-- Sejarah Lengkap -->
+        <div class="history-section">
+            <h2>⏳ Perjalanan Sejarah</h2>
+            <div class="history-timeline">
+                <div class="history-item">
+                    <div class="history-year">Abad 4</div>
+                    <div class="history-content">
+                        <h3>Kerajaan Tarumanagara</h3>
+                        <p>Kerajaan Hindu tertua di Jawa Barat yang meninggalkan prasasti Tugu dan Ciaruteun. Raja Purnawarman dikenal sebagai raja yang bijaksana dengan 7 prasasti.</p>
+                    </div>
+                </div>
+                <div class="history-item">
+                    <div class="history-year">669</div>
+                    <div class="history-content">
+                        <h3>Kerajaan Sunda</h3>
+                        <p>Berdirinya Kerajaan Sunda dengan pusat di Pakuan Pajajaran. Kerajaan ini mencapai kejayaan di bawah Prabu Siliwangi dengan wilayah meliputi seluruh Jawa bagian barat.</p>
+                    </div>
+                </div>
+                <div class="history-item">
+                    <div class="history-year">1482</div>
+                    <div class="history-content">
+                        <h3>Perjanjian Sunda-Portugal</h3>
+                        <p>Kerajaan Sunda menjalin hubungan diplomatik dengan Portugal melalui Perjanjian Loji di Sunda Kelapa, menandai kontak pertama dengan bangsa Eropa.</p>
+                    </div>
+                </div>
+                <div class="history-item">
+                    <div class="history-year">1527</div>
+                    <div class="history-content">
+                        <h3>Jatuhnya Sunda Kelapa</h3>
+                        <p>Fatahillah dari Demak merebut Sunda Kelapa dan mengubah namanya menjadi Jayakarta. Ini menandai awal penyebaran Islam di wilayah Jawa Barat.</p>
+                    </div>
+                </div>
+                <div class="history-item">
+                    <div class="history-year">1579</div>
+                    <div class="history-content">
+                        <h3>Kesultanan Banten</h3>
+                        <p>Kesultanan Banten menjadi pusat perdagangan lada terbesar di Asia Tenggara dan menguasai perdagangan di Selat Sunda.</p>
+                    </div>
+                </div>
+                <div class="history-item">
+                    <div class="history-year">1811</div>
+                    <div class="history-content">
+                        <h3>Era Kolonial</h3>
+                        <p>Gubernur Jenderal Daendels membangun Jalan Raya Pos (Anyer-Panarukan) yang melewati Jawa Barat, membuka akses transportasi modern.</p>
+                    </div>
+                </div>
+                <div class="history-item">
+                    <div class="history-year">1945</div>
+                    <div class="history-content">
+                        <h3>Provinsi Jawa Barat</h3>
+                        <p>Resmi menjadi provinsi setelah kemerdekaan Indonesia. Bandung menjadi ibu kota dan menjadi tuan rumah Konferensi Asia-Afrika pada tahun 1955.</p>
+                    </div>
+                </div>
+                <div class="history-item">
+                    <div class="history-year">2000</div>
+                    <div class="history-content">
+                        <h3>Pemekaran Banten</h3>
+                        <p>Provinsi Banten memisahkan diri dari Jawa Barat, membentuk provinsi baru yang ke-30 di Indonesia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Keunikan Jawa Barat -->
+        <div class="uniqueness-grid">
+            <div class="unique-box" style="background-image: url('alam.jpeg')">
+                <div class="unique-icon">🏔️</div>
+                <h3>Alam Menakjubkan</h3>
+                <p>Gunung berapi aktif seperti Tangkuban Perahu dan Papandayan, danau vulkanik Kawah Putih, air terjun spektakuler, dan pantai eksotis selatan Jawa.</p>
+            </div>
+            <div class="unique-box" style="background-image: url('budaya.jpeg')">
+                <div class="unique-icon">🎭</div>
+                <h3>Budaya Sunda</h3>
+                <p>Seni tradisional yang kaya: Wayang Golek, Jaipong, Angklung hingga Pencak Silat legendaris yang diakui UNESCO.</p>
+            </div>
+            <div class="unique-box" style="background-image: url('kuliner2.webp')">
+                <div class="unique-icon">🍜</div>
+                <h3>Kuliner Lezat</h3>
+                <p>Surabi, Batagor, Mie Kocok, Seblak, Nasi Liwet, dan ratusan makanan khas lainnya yang menggugah selera.</p>
+            </div>
+            <div class="unique-box" style="background-image: url('teh.jpg')">
+                <div class="unique-icon">🌿</div>
+                <h3>Perkebunan Teh</h3>
+                <p>Hamparan perkebunan teh terluas di Indonesia dengan kualitas ekspor. Penghasil teh premium sejak era kolonial Belanda.</p>
+            </div>
+            <div class="unique-box" style="background-image: url('pend.jpg')">
+                <div class="unique-icon">🎓</div>
+                <h3>Pusat Pendidikan</h3>
+                <p>Rumah bagi ITB, UNPAD, UPI dan puluhan universitas berkualitas. Kota Bandung dijuluki "Kota Pelajar" kedua setelah Yogyakarta.</p>
+            </div>
+            <div class="unique-box" style="background-image: url('industri.jpg')">
+                <div class="unique-icon">🏭</div>
+                <h3>Industri Kreatif</h3>
+                <p>Pusat fashion dan distro terbesar di Indonesia. Factory outlet, kuliner, dan industri kreatif yang menarik jutaan wisatawan.</p>
+            </div>
+        </div>
+
+        <!-- Filosofi Sunda -->
+        <div class="filosofi-section">
+            <div class="filosofi-quote">"Silih Asih, Silih Asah, Silih Asuh"</div>
+            <div class="filosofi-meaning">
+                Filosofi hidup masyarakat Sunda yang berarti saling mengasihi, saling mencerdaskan, dan saling melindungi. Nilai-nilai luhur ini menjadi landasan kehidupan bermasyarakat yang harmonis di Tanah Parahyangan, menciptakan masyarakat yang ramah, toleran, dan gotong royong.
+            </div>
+            <div class="filosofi-values">
+                <div class="filosofi-value">
+                    <span>❤️</span>
+                    <span>Silih Asih (Saling Mengasihi)</span>
+                </div>
+                <div class="filosofi-value">
+                    <span>📚</span>
+                    <span>Silih Asah (Saling Mencerdaskan)</span>
+                </div>
+                <div class="filosofi-value">
+                    <span>🤝</span>
+                    <span>Silih Asuh (Saling Melindungi)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Masyarakat Jawa Barat -->
+        <div class="masyarakat-section">
+            <h2>👥 Masyarakat Jawa Barat</h2>
+            <p class="masyarakat-subtitle">Keberagaman Etnis dan Budaya yang Harmonis</p>
+            
+            <div class="masyarakat-grid">
+                <div class="masyarakat-card">
+                    <div class="masyarakat-icon">🏠</div>
+                    <div class="masyarakat-content">
+                        <h3>Suku Sunda</h3>
+                        <p>Mayoritas penduduk Jawa Barat adalah suku Sunda dengan bahasa dan budaya yang khas. Dikenal ramah, sopan, dan menjunjung tinggi nilai-nilai kekeluargaan. Tradisi gotong royong masih kuat dalam kehidupan sehari-hari.</p>
+                    </div>
+                </div>
+                <div class="masyarakat-card">
+                    <div class="masyarakat-icon">🎎</div>
+                    <div class="masyarakat-content">
+                        <h3>Suku Betawi</h3>
+                        <p>Mendiami wilayah perbatasan dengan Jakarta seperti Bekasi dan Depok. Membawa pengaruh budaya Betawi yang unik dengan seni Lenong dan kuliner khasnya.</p>
+                    </div>
+                </div>
+                <div class="masyarakat-card">
+                    <div class="masyarakat-icon">⛩️</div>
+                    <div class="masyarakat-content">
+                        <h3>Masyarakat Cirebon</h3>
+                        <p>Perpaduan unik budaya Sunda, Jawa, dan pengaruh China. Memiliki bahasa Cirebon sendiri dan tradisi keraton yang masih lestari hingga kini.</p>
+                    </div>
+                </div>
+                <div class="masyarakat-card">
+                    <div class="masyarakat-icon">🏔️</div>
+                    <div class="masyarakat-content">
+                        <h3>Masyarakat Baduy</h3>
+                        <p>Komunitas adat yang tinggal di Pegunungan Kendeng, Lebak. Masih mempertahankan tradisi leluhur dan menolak modernisasi. Dibagi menjadi Baduy Dalam dan Baduy Luar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Budaya Preview -->
+        <div class="budaya-preview">
+            <h2>🎭 Kekayaan Budaya</h2>
+            <p class="budaya-preview-subtitle">Warisan Leluhur yang Tetap Lestari</p>
+            
+            <div class="budaya-carousel">
+                <div class="budaya-card">
+                    <div class="budaya-card-image" style="background-image: url('w.jpg')"></div>
+                    <div class="budaya-card-content">
+                        <h4>🎭 Wayang Golek</h4>
+                        <p>Seni pertunjukan boneka kayu 3D yang menceritakan kisah Ramayana & Mahabharata. Diakui UNESCO sebagai warisan budaya dunia.</p>
+                    </div>
+                </div>
+                <div class="budaya-card">
+                    <div class="budaya-card-image" style="background-image: url('masyarakat.jpg')"></div>
+                    <div class="budaya-card-content">
+                        <h4>🎵 Angklung</h4>
+                        <p>Alat musik bambu yang dimainkan dengan digoyangkan. Diakui UNESCO dan menjadi kebanggaan budaya Indonesia di dunia internasional.</p>
+                    </div>
+                </div>
+                <div class="budaya-card">
+                    <div class="budaya-card-image" style="background-image: url('t.jpg')"></div>
+                    <div class="budaya-card-content">
+                        <h4>💃 Tari Jaipong</h4>
+                        <p>Tarian dinamis khas Sunda yang menggabungkan unsur pencak silat dengan gerakan enerjik dan iringan gamelan yang menghentak.</p>
+                    </div>
+                </div>
+                <div class="budaya-card">
+                    <div class="budaya-card-image" style="background-image: url('silat.jpeg')"></div>
+                    <div class="budaya-card-content">
+                        <h4>⚔️ Pencak Silat</h4>
+                        <p>Seni bela diri tradisional dengan berbagai aliran khas Sunda seperti Cimande dan Cikalong yang terkenal di seluruh nusantara.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kesenian Tradisional -->
+        <div class="kesenian-section">
+            <h2>🎨 Kesenian Tradisional</h2>
+            <p class="kesenian-subtitle">Ragam Seni yang Memperkaya Budaya Indonesia</p>
+            
+            <div class="kesenian-grid">
+                <div class="kesenian-card">
+                    <div class="kesenian-icon">🎹</div>
+                    <h4>Degung</h4>
+                    <p>Musik tradisional Sunda dengan gamelan yang menghasilkan melodi lembut dan menenangkan. Sering mengiringi upacara adat dan pertunjukan.</p>
+                </div>
+                <div class="kesenian-card">
+                    <div class="kesenian-icon">🎤</div>
+                    <h4>Kecapi Suling</h4>
+                    <p>Perpaduan harmonis kecapi dan suling yang menciptakan alunan musik romantis khas Sunda. Populer untuk mengiringi tembang Sunda.</p>
+                </div>
+                <div class="kesenian-card">
+                    <div class="kesenian-icon">🎪</div>
+                    <h4>Sisingaan</h4>
+                    <p>Atraksi arak-arakan dengan anak duduk di atas boneka singa. Tradisi khitanan yang meriah dan penuh kegembiraan.</p>
+                </div>
+                <div class="kesenian-card">
+                    <div class="kesenian-icon">🥁</div>
+                    <h4>Rampak Gendang</h4>
+                    <p>Pertunjukan kolaborasi pemain kendang dengan gerakan kompak yang memukau. Simbol kekompakan dan kebersamaan.</p>
+                </div>
+                <div class="kesenian-card">
+                    <div class="kesenian-icon">👘</div>
+                    <h4>Batik Sunda</h4>
+                    <p>Motif batik khas seperti Batik Trusmi Cirebon, Batik Garutan, dan Batik Tasikmalayan dengan corak unik yang berbeda.</p>
+                </div>
+                <div class="kesenian-card">
+                    <div class="kesenian-icon">🏺</div>
+                    <h4>Kerajinan Anyaman</h4>
+                    <p>Anyaman bambu dan rotan berkualitas tinggi dari Tasikmalaya yang dikenal hingga mancanegara. Produk ekspor unggulan.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bahasa Sunda -->
+        <div class="bahasa-section">
+            <h2>🗣️ Bahasa Sunda</h2>
+            <p class="bahasa-subtitle">Bahasa Daerah dengan Tingkatan Kesopanan yang Unik</p>
+            
+            <div class="bahasa-grid">
+                <div class="bahasa-card">
+                    <div class="bahasa-sunda">"Sampurasun"</div>
+                    <div class="bahasa-indonesia">Salam pembuka (Assalamualaikum)</div>
+                    <div class="bahasa-usage">Digunakan saat bertamu atau menyapa</div>
+                </div>
+                <div class="bahasa-card">
+                    <div class="bahasa-sunda">"Rampes"</div>
+                    <div class="bahasa-indonesia">Jawaban salam (Waalaikumsalam)</div>
+                    <div class="bahasa-usage">Balasan dari "Sampurasun"</div>
+                </div>
+                <div class="bahasa-card">
+                    <div class="bahasa-sunda">"Hatur Nuhun"</div>
+                    <div class="bahasa-indonesia">Terima kasih</div>
+                    <div class="bahasa-usage">Ungkapan rasa terima kasih yang sopan</div>
+                </div>
+                <div class="bahasa-card">
+                    <div class="bahasa-sunda">"Punten"</div>
+                    <div class="bahasa-indonesia">Permisi / Maaf</div>
+                    <div class="bahasa-usage">Digunakan saat ingin lewat atau meminta maaf</div>
+                </div>
+                <div class="bahasa-card">
+                    <div class="bahasa-sunda">"Wilujeng Sumping"</div>
+                    <div class="bahasa-indonesia">Selamat Datang</div>
+                    <div class="bahasa-usage">Menyambut tamu dengan hormat</div>
+                </div>
+                <div class="bahasa-card">
+                    <div class="bahasa-sunda">"Damang?"</div>
+                    <div class="bahasa-indonesia">Apa kabar? / Sehat?</div>
+                    <div class="bahasa-usage">Menanyakan kabar dengan sopan</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DESTINASI -->
+    <section class="page-section" id="destinasi">
+        <h1 class="section-title">Destinasi Wisata</h1>
+        <p class="section-subtitle">Keajaiban Alam Tanah Parahyangan</p>
+
+        <div class="destination-banner" style="background-image: url('kwh.jpg')">
+            <div class="banner-content">
+                <h2>Kawah Putih Ciwidey</h2>
+                <p>Danau vulkanik yang memukau dengan air berwarna putih kehijauan dan pemandangan mistis yang tak terlupakan. Salah satu keajaiban alam Indonesia.</p>
+            </div>
+        </div>
+
+        <div class="destination-list">
+            <div class="dest-row">
+                <div class="dest-image" style="background-image: url('tp.jpg')"></div>
+                <div class="dest-info">
+                    <h3>Tangkuban Perahu</h3>
+                    <p>Gunung berapi aktif dengan kawah yang bisa dikunjungi langsung. Nikmati pemandangan kawah yang mengeluarkan asap belerang dan legenda Sangkuriang yang terkenal. Destinasi wajib saat berkunjung ke Bandung.</p>
+                    <div class="dest-details">
+                        <div class="detail-item">
+                            <span class="detail-icon">📍</span>
+                            <span class="detail-text">Lembang, Bandung Barat</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">🎫</span>
+                            <span class="detail-text">Rp 30.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dest-row">
+                <div class="dest-image" style="background-image: url('s.webp')"></div>
+                <div class="dest-info">
+                    <h3>Situ Patenggang</h3>
+                    <p>Danau romantis di ketinggian 1.600 mdpl dengan Pulau Asmara di tengahnya. Legenda cinta Prabu dan Dewi Rengganis menambah kesan magis tempat ini. Sempurna untuk pelayaran dan piknik.</p>
+                    <div class="dest-details">
+                        <div class="detail-item">
+                            <span class="detail-icon">📍</span>
+                            <span class="detail-text">Ciwidey, Bandung</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">🎫</span>
+                            <span class="detail-text">Rp 25.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dest-row">
+                <div class="dest-image" style="background-image: url('pp.jpg')"></div>
+                <div class="dest-info">
+                    <h3>Pantai Pangandaran</h3>
+                    <p>Pantai terbaik di Jawa Barat dengan pasir putih, ombak yang ramah untuk peselancar, dan cagar alam yang menakjubkan. Nikmati sunset spektakuler dan seafood segar langsung dari nelayan.</p>
+                    <div class="dest-details">
+                        <div class="detail-item">
+                            <span class="detail-icon">📍</span>
+                            <span class="detail-text">Pangandaran</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">🎫</span>
+                            <span class="detail-text">Rp 10.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dest-row">
+                <div class="dest-image" style="background-image: url('kt.jpeg')"></div>
+                <div class="dest-info">
+                    <h3>Kebun Teh Malabar</h3>
+                    <p>Hamparan perkebunan teh seluas mata memandang dengan udara sejuk pegunungan. Nikmati teh segar langsung dari kebun dan pelajari proses pembuatan teh berkualitas ekspor.</p>
+                    <div class="dest-details">
+                        <div class="detail-item">
+                            <span class="detail-icon">📍</span>
+                            <span class="detail-text">Pangalengan, Bandung</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">🎫</span>
+                            <span class="detail-text">Rp 15.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KULINER -->
+    <section class="page-section" id="kuliner">
+        <h1 class="section-title">Kuliner Khas</h1>
+        <p class="section-subtitle">Cita Rasa Autentik Tanah Sunda</p>
+
+        <div class="culinary-showcase">
+            <div class="culinary-feature">
+                <div class="culinary-image" style="background-image: url('nt.jpg')"></div>
+                <div class="culinary-text">
+                    <h3>Nasi Timbel</h3>
+                    <p>Hidangan ikonik Sunda berupa nasi yang dibungkus daun pisang, disajikan dengan ayam goreng, lalapan segar, sambal terasi, dan tahu tempe. Aroma daun pisang yang hangat memberikan sensasi makan yang berbeda.</p>
+                    <p>Biasanya disajikan bersama ikan asin, perkedel jagung, dan sayur asem segar. Kombinasi sempurna untuk pengalaman kuliner Sunda yang otentik.</p>
+                    <span class="culinary-badge">🍃 Hidangan Tradisional</span>
+                </div>
+            </div>
+
+            <div class="culinary-feature">
+                <div class="culinary-image" style="background-image: url('siomay.jpg')"></div>
+                <div class="culinary-text">
+                    <h3>Batagor & Siomay</h3>
+                    <p>Kombinasi bakso tahu goreng dengan siomay ikan tenggiri yang lezat, disiram bumbu kacang khas dan kecap manis. Jajanan legendaris yang menjadi ikon kuliner Bandung sejak puluhan tahun.</p>
+                    <p>Disajikan dengan perasan jeruk limau segar dan taburan bawang goreng. Sempurna sebagai camilan sore atau teman makan siang.</p>
+                    <span class="culinary-badge">🥟 Jajanan Legendaris</span>
+                </div>
+            </div>
+
+            <div class="culinary-feature">
+                <div class="culinary-image" style="background-image: url('serabi.jpg')"></div>
+                <div class="culinary-text">
+                    <h3>Surabi Bandung</h3>
+                    <p>Pancake tradisional Sunda dari tepung beras dengan berbagai topping: oncom, cokelat, keju, pisang, hingga durian. Tekstur lembut dengan pinggiran renyah yang khas.</p>
+                    <p>Dimasak di atas anglo arang dengan cetakan tanah liat yang memberikan aroma smoky yang unik. Nikmat disantap hangat dengan kopi tubruk.</p>
+                    <span class="culinary-badge">🥞 Jajanan Manis</span>
+                </div>
+            </div>
+
+            <div class="culinary-feature">
+                <div class="culinary-image" style="background-image: url('mie.jpeg')"></div>
+                <div class="culinary-text">
+                    <h3>Mie Kocok Bandung</h3>
+                    <p>Mie kuning dengan kuah kaldu sapi yang gurih, dilengkapi kikil, tauge, dan irisan daging sapi empuk. Ditaburi bawang goreng dan seledri segar untuk aroma yang menggoda.</p>
+                    <p>Hidangan hangat yang sempurna untuk cuaca dingin Bandung. Nikmati dengan sambal dan kecap sesuai selera.</p>
+                    <span class="culinary-badge">🍜 Kuliner Berkuah</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BUDAYA -->
+    <section class="page-section" id="budaya">
+        <h1 class="section-title">Budaya & Tradisi</h1>
+        <p class="section-subtitle">Warisan Leluhur Tanah Sunda</p>
+
+        <div class="budaya-hero" style="background-image: url('kes.jpg')">
+            <div class="budaya-hero-content">
+                <h2>Kesenian Sunda yang Memukau</h2>
+                <p>Jawa Barat memiliki kekayaan budaya yang luar biasa, dari kesenian tradisional hingga filosofi hidup yang masih dijaga hingga kini. Setiap gerak tari dan alunan musik menceritakan kisah nenek moyang.</p>
+            </div>
+        </div>
+
+        <div class="budaya-grid">
+            <div class="budaya-item">
+                <div class="budaya-image" style="background-image: url('w.jpg')"></div>
+                <div class="budaya-text">
+                    <h3>🎭 Wayang Golek</h3>
+                    <p>Seni pertunjukan boneka kayu tiga dimensi yang menceritakan epik Ramayana dan Mahabharata. Dalang menghidupkan karakter dengan suara berbeda dan gerakan yang memukau. UNESCO mengakuinya sebagai Masterpiece of Oral and Intangible Heritage of Humanity.</p>
+                </div>
+            </div>
+
+            <div class="budaya-item">
+                <div class="budaya-image" style="background-image: url('masyarakat.jpg')"></div>
+                <div class="budaya-text">
+                    <h3>🎵 Angklung</h3>
+                    <p>Alat musik bambu yang dimainkan dengan digoyangkan. Setiap angklung menghasilkan satu nada, sehingga memerlukan kerjasama tim untuk memainkan melodi lengkap. Saung Angklung Udjo menjadi pusat pelestarian dan pertunjukan angklung terbesar di dunia.</p>
+                </div>
+            </div>
+
+            <div class="budaya-item">
+                <div class="budaya-image" style="background-image: url('t.jpg')"></div>
+                <div class="budaya-text">
+                    <h3>💃 Tari Jaipong</h3>
+                    <p>Tarian dinamis yang menggabungkan unsur pencak silat, ketuk tilu, dan topeng banjet. Gerakannya enerjik dengan iringan gamelan degung yang menghentak. Diciptakan oleh Gugum Gumbira pada tahun 1970-an dan menjadi identitas kesenian Jawa Barat modern.</p>
+                </div>
+            </div>
+
+            <div class="budaya-item">
+                <div class="budaya-image" style="background-image: url('silat.jpeg')"></div>
+                <div class="budaya-text">
+                    <h3>⚔️ Pencak Silat</h3>
+                    <p>Seni bela diri tradisional dengan berbagai aliran khas Sunda seperti Cimande, Cikalong, dan Syahbandar. Lebih dari sekadar bela diri, pencak silat mengajarkan filosofi hidup, kesopanan, dan keseimbangan jiwa raga.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERI - BENTO GRID -->
+    <section class="page-section" id="galeri">
+        <h1 class="section-title">Galeri Destinasi</h1>
+        <p class="section-subtitle">Koleksi Tempat Wisata Terpopuler</p>
+
+        <div class="bento-grid">
+            <div class="bento-item" style="background-image: url('berandahero1.jpeg')">
+                <div class="bento-content">
+                    <h3>Gedung Sate</h3>
+                    <p>Ikon Kota Bandung dengan arsitektur Indo-Eropa yang megah sejak 1920.</p>
+                    <span class="price-badge">Gratis</span>
+                </div>
+            </div>
+
+            <div class="bento-item" style="background-image: url('b.jpg')">
+                <div class="bento-content">
+                    <h3>Braga Street</h3>
+                    <p>Jalan bersejarah dengan bangunan art deco dan kafe vintage.</p>
+                    <span class="price-badge">Gratis</span>
+                </div>
+            </div>
+
+            <div class="bento-item" style="background-image: url('kt.jpeg')">
+                <div class="bento-content">
+                    <h3>Perkebunan Teh</h3>
+                    <p>Hamparan hijau yang menyejukkan di dataran tinggi.</p>
+                    <span class="price-badge">Rp 15.000</span>
+                </div>
+            </div>
+
+            <div class="bento-item" style="background-image: url('ts.jpg')">
+                <div class="bento-content">
+                    <h3>Taman Safari</h3>
+                    <p>2.500+ satwa dengan konsep safari drive-thru yang seru.</p>
+                    <span class="price-badge">Rp 150.000</span>
+                </div>
+            </div>
+
+            <div class="bento-item" style="background-image: url('fm.jpg')">
+                <div class="bento-content">
+                    <h3>Floating Market</h3>
+                    <p>Pasar terapung dengan konsep tradisional modern.</p>
+                    <span class="price-badge">Rp 20.000</span>
+                </div>
+            </div>
+
+            <div class="bento-item" style="background-image: url('g.jpg')">
+                <div class="bento-content">
+                    <h3>Green Canyon</h3>
+                    <p>Ngarai hijau dengan air jernih untuk body rafting.</p>
+                    <span class="price-badge">Rp 100.000</span>
+                </div>
+            </div>
+
+            <div class="bento-item" style="background-image: url('tk.webp')">
+                <div class="bento-content">
+                    <h3>Tebing Keraton</h3>
+                    <p>Spot sunrise terbaik dengan pemandangan Kota Bandung.</p>
+                    <span class="price-badge">Rp 10.000</span>
+                </div>
+            </div>
+
+            <div class="bento-item" style="background-image: url('sg.webp')">
+                <div class="bento-content">
+                    <h3>Stone Garden</h3>
+                    <p>Formasi batu kapur unik seperti di negeri dongeng.</p>
+                    <span class="price-badge">Rp 15.000</span>
+                </div>
+            </div>
+
+            <div class="bento-item" style="background-image: url('c.webp')">
+                <div class="bento-content">
+                    <h3>Curug Cimahi</h3>
+                    <p>Air terjun setinggi 87 meter yang spektakuler.</p>
+                    <span class="price-badge">Rp 18.000</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PETA -->
+    <section class="page-section" id="peta">
+        <div class="map-header">
+            <div style="font-size: 5rem; margin-bottom: 1rem;">🗾</div>
+            <h1>PETA JAWA BARAT</h1>
+            <p style="font-size: 1.2rem; opacity: 0.8; margin-top: 1rem;">35.377,76 km² • 48+ Juta Penduduk • 27 Kabupaten/Kota</p>
+        </div>
+
+        <!-- Map Image -->
+        <div class="map-image-container">
+            <div class="map-image"></div>
+            <p class="map-caption">Peta administratif Provinsi Jawa Barat dengan pembagian kabupaten dan kota</p>
+        </div>
+
+        <h2 class="section-title" style="margin-bottom: 3rem;">Kabupaten & Kota</h2>
+
+        <div class="regions-grid">
+            <div class="region-card">
+                <h3>Kota Bandung</h3>
+                <p>Ibu kota provinsi, pusat pendidikan dan fashion. Paris van Java dengan kafe modern dan factory outlet terlengkap di Indonesia yang menarik wisatawan belanja.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Bandung</h3>
+                <p>Kawah Putih, Situ Patenggang, dan perkebunan teh. Destinasi wisata alam paling populer dengan udara sejuk pegunungan yang menyegarkan.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kota Bogor</h3>
+                <p>Kota Hujan dengan Kebun Raya Bogor yang terkenal di dunia. Istana Kepresidenan dan kuliner tradisional yang lezat menjadi daya tarik utama.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Bogor</h3>
+                <p>Puncak, Taman Safari, dan Gunung Salak. Destinasi wisata pegunungan favorit keluarga dengan resort dan villa mewah bertaburan.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kota Bekasi</h3>
+                <p>Kota industri penyangga Jakarta. Pusat ekonomi dengan infrastruktur modern yang berkembang pesat menjadi kota mandiri.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kota Cirebon</h3>
+                <p>Kota pelabuhan dengan budaya unik perpaduan Sunda-Jawa-China. Keraton bersejarah, batik trusmi, dan kuliner empal gentong yang legendaris.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Garut</h3>
+                <p>Dodol Garut dan kulit domba terkenal. Gunung Papandayan, Kampung Sampireun yang indah, dan sumber air panas alami yang menenangkan.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Sukabumi</h3>
+                <p>Pelabuhan Ratu dengan ombak besar, Geopark Ciletuh UNESCO. Pantai selatan yang memukau dengan legenda Nyi Roro Kidul yang mistis.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Cianjur</h3>
+                <p>Penghasil Beras Pandan Wangi terbaik di dunia. Kebun Raya Cibodas dan Taman Bunga Nusantara dengan koleksi flora yang menakjubkan.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Pangandaran</h3>
+                <p>Destinasi wisata pantai utama Jawa Barat. Green Canyon yang mendunia, Batu Hiu, dan cagar alam dengan keanekaragaman hayati tinggi.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kota Tasikmalaya</h3>
+                <p>Kota Santri dengan kerajinan bordir dan anyaman bambu berkualitas tinggi. Pusat pendidikan pesantren terbesar di Jawa Barat.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Kuningan</h3>
+                <p>Kota Santri dengan pesantren besar. Gunung Ciremai tertinggi di Jawa Barat dan Sangkanhurip dengan pemandangan yang memukau.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Cirebon</h3>
+                <p>Kota Wali dengan makam Sunan Gunung Jati. Batik Trusmi, kuliner khas empal gentong, dan pusat budaya Islam di pesisir utara.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kota Cirebon</h3>
+                <p>Kota Udang dengan Keraton Kasepuhan dan Kanoman. Grage City Mall, Taman Sari Gua Sunyaragi, dan pelabuhan bersejarah.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Indramayu</h3>
+                <p>Lumbung padi Jawa Barat dengan hasil pertanian melimpah. Pantai Karangsong, industri minyak dan gas, serta budaya pesisir yang kental.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Majalengka</h3>
+                <p>Kota Loji dengan mangga harum manis terkenal. Situs Cipari bersejarah, Curug Muara Jaya, dan pertanian yang subur.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Sumedang</h3>
+                <p>Kota Tahu Bungkeng dengan wisata kuliner legendaris. Jatigede Dam terbesar, Gunung Tampomas, dan sejarah kerajaan Sumedang Larang.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Subang</h3>
+                <p>Kota Kemerdekaan dengan Patimban International Seaport. Pantai Ciater hot spring, Gunung Tangkuban Perahu, dan perkebunan teh.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Purwakarta</h3>
+                <p>Kota Daging dengan ikon Gapura Macan Ali. Waduk Jatiluhur PLTA terbesar, Situ Buleud, dan kawasan industri modern.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Karawang</h3>
+                <p>Kota Industri dengan pusat otomotif terbesar Indonesia. Pantai Tanjung Pakis, makam Arief Muhammad, dan kawasan ekonomi strategis.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Bekasi</h3>
+                <p>Penyangga Jakarta dengan pertumbuhan pesat. Situ Cibeureum, kampung wisata budaya, dan pusat bisnis modern.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kota Bekasi</h3>
+                <p>Kota Metropolitan dengan Mall-mall megah seperti Summarecon. Venetian Water Carnaval, kuliner 24 jam, dan akses LRT.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kota Depok</h3>
+                <p>Kota Pendidikan dengan Universitas Indonesia. Danau UI, ITC Depok, Margonda kuliner street, dan aksesibilitas Jakarta tinggi.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Ciamis</h3>
+                <p>Galuh Pakuan dengan Pantai Pangandaran terkenal. Situ Lengkong Panjalu, kerajinan bambu, dan budaya Sunda tradisional.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kabupaten Banjar</h3>
+                <p>Kota Pataruman dengan produksi beras unggul. Situbatu Langensari, budaya kuda renggong, dan kuliner nasi tutug oncom.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>Kota Banjar</h3>
+                <p>Kota termuda di Jawa Barat dengan potensi wisata religi. Kampung Naga tradisional, curug Muara Heuleut, dan budaya lokal kuat.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PEMERINTAHAN -->
+    <section class="page-section" id="pemerintahan">
+        <h1 class="section-title">Pemerintahan Jawa Barat</h1>
+        <p class="section-subtitle">Struktur & Layanan Publik Provinsi</p>
+
+        <div class="gov-intro">
+            <p>Pemerintah Provinsi Jawa Barat berkomitmen untuk memberikan pelayanan terbaik kepada masyarakat melalui tata kelola pemerintahan yang transparan, akuntabel, dan berorientasi pada kesejahteraan rakyat. Dengan visi "Jabar Juara Lahir Batin", pemerintah provinsi terus berinovasi dalam pembangunan dan pelayanan publik.</p>
+        </div>
+
+        <!-- Struktur Pemerintahan -->
+        <div class="gov-structure">
+            <h2>🏛️ Struktur Pemerintahan</h2>
+            
+            <div class="structure-diagram">
+                <div class="gov-leader">
+                    <div class="position">Gubernur Jawa Barat</div>
+                    <div class="name">Dr. H. Dedi Mulyadi, S.H., M.H.</div>
+                    <div class="period">Periode 2024-2029</div>
+                </div>
+                
+                <div class="connector-line"></div>
+                
+                <div class="gov-deputy">
+                    <div class="position">Wakil Gubernur Jawa Barat</div>
+                    <div class="name">Erwan Setiawan, S.E.</div>
+                </div>
+
+                <div class="org-grid">
+                    <div class="org-card">
+                        <div class="org-icon">📋</div>
+                        <h4>Sekretariat Daerah</h4>
+                        <p>Koordinasi dan penyelenggaraan administrasi pemerintahan</p>
+                    </div>
+                    <div class="org-card">
+                        <div class="org-icon">⚖️</div>
+                        <h4>DPRD Jawa Barat</h4>
+                        <p>Lembaga legislatif daerah dengan 120 anggota</p>
+                    </div>
+                    <div class="org-card">
+                        <div class="org-icon">🏢</div>
+                        <h4>Dinas & Badan</h4>
+                        <p>40+ Organisasi Perangkat Daerah pelaksana kebijakan</p>
+                    </div>
+                    <div class="org-card">
+                        <div class="org-icon">🗺️</div>
+                        <h4>Wilayah Administratif</h4>
+                        <p>18 Kabupaten dan 9 Kota di Jawa Barat</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Layanan Pemerintahan -->
+        <div class="gov-services">
+            <h2>🌐 Layanan Pemerintahan</h2>
+            <p class="section-subtitle">Akses Mudah untuk Berbagai Kebutuhan Masyarakat</p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">📄</div>
+                    <h3>Layanan Administrasi</h3>
+                    <p>Pengurusan KTP, KK, Akta Kelahiran, dan dokumen kependudukan lainnya secara online melalui sistem terintegrasi.</p>
+                    <a href="#" class="service-link">Akses Layanan →</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🏥</div>
+                    <h3>Layanan Kesehatan</h3>
+                    <p>Informasi rumah sakit, puskesmas, dan program kesehatan masyarakat. Termasuk pendaftaran BPJS dan konsultasi online.</p>
+                    <a href="#" class="service-link">Info Kesehatan →</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🎓</div>
+                    <h3>Layanan Pendidikan</h3>
+                    <p>PPDB Online, beasiswa, dan informasi sekolah di seluruh Jawa Barat. Program pendidikan gratis hingga SMA/SMK.</p>
+                    <a href="#" class="service-link">Portal Pendidikan →</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💼</div>
+                    <h3>Layanan Perizinan</h3>
+                    <p>OSS (Online Single Submission) untuk perizinan usaha, IMB, dan izin lainnya. Proses cepat dan transparan.</p>
+                    <a href="#" class="service-link">Ajukan Izin →</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🚨</div>
+                    <h3>Layanan Darurat</h3>
+                    <p>Pusat koordinasi kebencanaan dan keadaan darurat. Hotline 24 jam untuk pelaporan dan bantuan cepat.</p>
+                    <a href="#" class="service-link">Hubungi 112 →</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📢</div>
+                    <h3>Pengaduan Masyarakat</h3>
+                    <p>LAPOR! Jawa Barat untuk menyampaikan aspirasi, kritik, dan saran kepada pemerintah dengan jaminan tindak lanjut.</p>
+                    <a href="#" class="service-link">Sampaikan Aspirasi →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kontak -->
+        <div class="gov-contact">
+            <h3>📍 Kantor Pemerintah Provinsi Jawa Barat</h3>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="icon">🏛️</div>
+                    <div class="text">
+                        <div class="label">Alamat</div>
+                        <div class="value">Jl. Diponegoro No. 22, Bandung 40115</div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">📞</div>
+                    <div class="text">
+                        <div class="label">Telepon</div>
+                        <div class="value">(022) 4232448</div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">🌐</div>
+                    <div class="text">
+                        <div class="label">Website</div>
+                        <div class="value">jabarprov.go.id</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Provinsi Jawa Barat - Tanah Parahyangan. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+
+  // ===== Burger navbar toggle =====
+        const nav = document.querySelector('nav');
+        const burger = document.querySelector('.burger');
+        const navLinksList = document.querySelector('.nav-links'); // UL (container menu)
+
+        // Toggle buka/tutup menu
+        if (burger && nav) {
+        burger.addEventListener('click', () => {
+            const isOpen = nav.classList.toggle('nav-open');
+            burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        }
+
+        // Auto close saat klik salah satu link menu
+        if (navLinksList && burger && nav) {
+        navLinksList.addEventListener('click', (e) => {
+            if (e.target.tagName.toLowerCase() === 'a') {
+            nav.classList.remove('nav-open');
+            burger.setAttribute('aria-expanded', 'false');
+            }
+        });
+        }
+
+
+        // ===== Navigasi halaman (single page sections) =====
+        const navLinks = document.querySelectorAll('.nav-links a'); // semua <a> di nav
+        const sections = document.querySelectorAll('.page-section');
+        const hero = document.getElementById('hero');
+
+        navLinks.forEach((link) => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetPage = this.getAttribute('data-page');
+            navigateTo(targetPage);
+
+            // optional: tutup menu burger juga (biar rapi)
+            if (nav && burger) {
+            nav.classList.remove('nav-open');
+            burger.setAttribute('aria-expanded', 'false');
+            }
+        });
+        });
+
+        function navigateTo(page) {
+        if (hero) hero.style.display = 'none';
+
+        sections.forEach((section) => section.classList.remove('active'));
+
+        const targetSection = document.getElementById(page);
+        if (targetSection) targetSection.classList.add('active');
+
+        navLinks.forEach((link) => {
+            link.classList.remove('active');
+            if (link.getAttribute('data-page') === page) {
+            link.classList.add('active');
+            }
+        });
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Tombol di hero
+        const heroBtn = document.querySelector('.hero-btn');
+        if (heroBtn) {
+        heroBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            navigateTo('beranda');
+        });
+        }
+
+        // Reset saat halaman pertama kali load
+        window.addEventListener('load', function () {
+        if (hero) hero.style.display = 'flex';
+        sections.forEach((section) => section.classList.remove('active'));
+        });
+
+    </script>
+</body>
+</html>
